@@ -9,8 +9,15 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 
 const form = useForm({
-    name: '',
+    first_name: '',
+    last_name: '',
+    username: '',
     email: '',
+    address: '',
+    phone: '',
+    zone: '',
+    city: '',
+    state: '',
     password: '',
     password_confirmation: '',
     terms: false,
@@ -30,20 +37,49 @@ const submit = () => {
         <template #logo>
             <AuthenticationCardLogo />
         </template>
+        <div>
 
-        <form @submit.prevent="submit">
+        </div>
+
+        <form @submit.prevent="submit" class="grid gap-4 sm:grid-cols-1 md:grid-cols-2">
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel for="first_name" value="First Name" />
                 <TextInput
-                    id="name"
-                    v-model="form.name"
+                    id="first_name"
+                    v-model="form.first_name"
                     type="text"
                     class="mt-1 block w-full"
                     required
                     autofocus
-                    autocomplete="name"
+                    autocomplete="first_name"
                 />
-                <InputError class="mt-2" :message="form.errors.name" />
+                <InputError class="mt-2" :message="form.errors.first_name" />
+            </div>
+            <div>
+                <InputLabel for="last_name" value="Last Name" />
+                <TextInput
+                    id="last_name"
+                    v-model="form.last_name"
+                    type="text"
+                    class="mt-1 block w-full"
+                    required
+                    autofocus
+                    autocomplete="last_name"
+                />
+                <InputError class="mt-2" :message="form.errors.last_name" />
+            </div>
+            <div>
+                <InputLabel for="username" value="Username" />
+                <TextInput
+                    id="username"
+                    v-model="form.username"
+                    type="text"
+                    class="mt-1 block w-full"
+                    required
+                    autofocus
+                    autocomplete="username"
+                />
+                <InputError class="mt-2" :message="form.errors.username" />
             </div>
 
             <div class="mt-4">
@@ -57,6 +93,76 @@ const submit = () => {
                     autocomplete="username"
                 />
                 <InputError class="mt-2" :message="form.errors.email" />
+            </div>
+
+            <div>
+                <InputLabel for="address" value="Address" />
+                <TextInput
+                    id="address"
+                    v-model="form.address"
+                    type="text"
+                    class="mt-1 block w-full"
+                    required
+                    autofocus
+                    autocomplete="Address"
+                />
+                <InputError class="mt-2" :message="form.errors.address" />
+            </div>
+
+            <div>
+                <InputLabel for="phone" value="Phone" />
+                <TextInput
+                    id="phone"
+                    v-model="form.phone"
+                    type="tel"
+                    class="mt-1 block w-full"
+                    required
+                    autofocus
+                    autocomplete="Phone"
+                />
+                <InputError class="mt-2" :message="form.errors.phone" />
+            </div>
+
+            <div>
+                <InputLabel for="zone" value="Zone" />
+                <TextInput
+                    id="zone"
+                    v-model="form.zone"
+                    type="text"
+                    class="mt-1 block w-full"
+                    required
+                    autofocus
+                    autocomplete="Zone"
+                />
+                <InputError class="mt-2" :message="form.errors.zone" />
+            </div>
+
+            <div>
+                <InputLabel for="city" value="City" />
+                <TextInput
+                    id="city"
+                    v-model="form.city"
+                    type="text"
+                    class="mt-1 block w-full"
+                    required
+                    autofocus
+                    autocomplete="City"
+                />
+                <InputError class="mt-2" :message="form.errors.city" />
+            </div>
+
+            <div>
+                <InputLabel for="state" value="State" />
+                <TextInput
+                    id="state"
+                    v-model="form.state"
+                    type="text"
+                    class="mt-1 block w-full"
+                    required
+                    autofocus
+                    autocomplete="State"
+                />
+                <InputError class="mt-2" :message="form.errors.state" />
             </div>
 
             <div class="mt-4">

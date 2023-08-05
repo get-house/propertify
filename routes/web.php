@@ -1,5 +1,6 @@
 <?php
 
+use App\Domain\Property\Http\Controllers\PropertyController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -33,3 +34,8 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 });
+
+/**
+ * Property routes
+ */
+ require __DIR__.'/properties.php';
