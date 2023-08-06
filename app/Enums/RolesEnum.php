@@ -5,6 +5,7 @@ use App\Models\Role;
 
 enum RolesEnum: string
 {
+
     case ADMIN = 'admin';
     case LANDLORD = 'landlord';
     case AGENT = 'agent';

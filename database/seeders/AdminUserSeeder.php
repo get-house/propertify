@@ -23,6 +23,7 @@ class AdminUserSeeder extends Seeder
             'email_verified_at' => now(),
 
         ]);
-        User::find($adminUser->id)->assignRole('admin');
+        User::find($adminUser->id)->assignRole(RolesEnum::ADMIN->value);
+		User::factory()->count(10)->create();
     }
 }

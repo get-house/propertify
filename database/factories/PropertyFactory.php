@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Domain\Property\Models\Property;
+use App\Models\Landlord;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -44,9 +45,7 @@ class PropertyFactory extends Factory
                     'Umm Salal'
                 ]
             ),
-            'user_id' => User::whereHas('roles', function ($query) {
-                $query->where('name', 'admin');
-            })->get()->random()->id,
+            'landlord_id' => Landlord::get()->random()->id,
 
         ];
     }

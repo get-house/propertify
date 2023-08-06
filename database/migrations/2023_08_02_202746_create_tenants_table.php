@@ -12,11 +12,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('landlords', function (Blueprint $table) {
+        Schema::create('tenants', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
-
-            $table->string('status')->default(\App\Enums\LandlordStatusEnum::Pending->value);
+            $table->string('status')->default(\App\Enums\TenantStatusEnum::Pending->value);
             $table->boolean('is_paused')->default(false);
 
             $table->softDeletes();
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('landlords');
+        Schema::dropIfExists('tenants');
     }
 };

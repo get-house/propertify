@@ -1,5 +1,9 @@
 <?php
 
+use App\Domain\Property\Enums\PropertyConditionEnum;
+use App\Domain\Property\Enums\PropertyFurnishingEnum;
+use App\Domain\Property\Enums\PropertyStatusEnum;
+use App\Domain\Property\Enums\PropertyTypeEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,9 +20,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('price');
             $table->string('description')->nullable();
-            $table->string('condition')->default('new');
-            $table->string('status')->default('available');
-            $table->string('type')->default('unfurnished');
+            $table->string('condition')->default(PropertyConditionEnum::NEW);
+            $table->string('status')->default(PropertyStatusEnum::AVAILABLE);
+            $table->string('type')->default(PropertyTypeEnum::APARTMENT);
+			$table->string('furnishing')->default(PropertyFurnishingEnum::UNFURNISHED);
             $table->string('bedrooms')->default(1);
             $table->string('bathrooms')->default(1);
             $table->string('parking')->default(1);
@@ -26,10 +31,10 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
-            $table->string('verified')->default(0);
-            $table->string('featured')->default(0);
+            $table->boolean('verified')->default(0);
+            $table->boolean('featured')->default(0);
 
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('landlord_id')->constrained('landlords')->onDelete('cascade')->onUpdate('cascade');
 
             $table->dateTime('published_at')->nullable();
             $table->dateTime('expired_at')->nullable();

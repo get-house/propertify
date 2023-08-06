@@ -32,6 +32,8 @@ return new class extends Migration
             $table->string('country')->nullable();
             $table->dateTime('last_login_at')->nullable();
             $table->boolean('force_reset_password')->default(false);
+            $table->string('profile_type')->nullable();
+            $table->unsignedInteger('profile_id')->nullable();
             $table->softDeletes();
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();

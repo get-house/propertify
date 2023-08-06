@@ -2,7 +2,10 @@
 
 namespace App\Actions\Fortify;
 
+use App\Data\UserData;
 use App\Enums\RolesEnum;
+use App\Models\Agent;
+use App\Models\Landlord;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -46,11 +49,22 @@ class CreateNewUser implements CreatesNewUsers
             'state' => $input['state'],
             'password' => Hash::make($input['password']),
         ]);
-        $user->assignRole(RolesEnum::USER->value);
+
+        if ($input['profile_type']=== 'landlord') {
+            $landlord = Landlord::create();
+            $user->update(['profile_id' => $landlord->id, 'profile_type' => Landlord::class]);
+            $user->profile()->associate($landlord);
+            $user->assignRole(RolesEnum::LANDLORD->value);
+        }elseif ($input['profile_type']=== 'agent') {
+            $agent = Agent::create();
+            $user->update(['profile_id' => $agent->id, 'profile_type' => Agent::class]);
+            $user->profile()->associate($agent);
+            $user->assignRole(RolesEnum::AGENT->value);
+        }else{
+            $user->assignRole(RolesEnum::USER->value);
+        }
 
         return $user;
-
-
 
     }
 }

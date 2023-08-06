@@ -6,6 +6,7 @@ use App\Enums\RolesEnum;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -37,6 +38,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'address',
         'city',
         'state',
+        'profile_type',
+        'profile_id',
         'zip_code',
         'country',
     ];
@@ -95,6 +98,17 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isUser(): bool
     {
         return $this->hasRole(RolesEnum::USER->value);
+    }
+
+    /**
+     * Model Relationships
+     *
+     * @return RELATIONSHIPS
+     */
+
+    public function profile() : MorphTo
+    {
+        return $this->morphTo();
     }
 
 }

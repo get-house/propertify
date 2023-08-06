@@ -1,4 +1,4 @@
-<script setup>
+<script setup >
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import AuthenticationCard from '@/Components/AuthenticationCard.vue';
 import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo.vue';
@@ -20,10 +20,12 @@ const form = useForm({
     state: '',
     password: '',
     password_confirmation: '',
+    profile_type: '',
     terms: false,
 });
 
 const submit = () => {
+    console.log(form.profile_type);
     form.post(route('register'), {
         onFinish: () => form.reset('password', 'password_confirmation'),
     });
@@ -41,7 +43,7 @@ const submit = () => {
 
         </div>
 
-        <form @submit.prevent="submit" class="grid gap-4 sm:grid-cols-1 md:grid-cols-2">
+        <form @submit.prevent="submit" >
             <div>
                 <InputLabel for="first_name" value="First Name" />
                 <TextInput
@@ -51,7 +53,8 @@ const submit = () => {
                     class="mt-1 block w-full"
                     required
                     autofocus
-                    autocomplete="first_name"
+                    autocomplete="First name"
+                    placeholder="Jane"
                 />
                 <InputError class="mt-2" :message="form.errors.first_name" />
             </div>
@@ -65,6 +68,7 @@ const submit = () => {
                     required
                     autofocus
                     autocomplete="last_name"
+                    placeholder="Doe"
                 />
                 <InputError class="mt-2" :message="form.errors.last_name" />
             </div>
@@ -78,6 +82,7 @@ const submit = () => {
                     required
                     autofocus
                     autocomplete="username"
+                    placeholder="janedoe4real"
                 />
                 <InputError class="mt-2" :message="form.errors.username" />
             </div>
@@ -91,6 +96,7 @@ const submit = () => {
                     class="mt-1 block w-full"
                     required
                     autocomplete="username"
+                    placeholder="jane@doe.com"
                 />
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
@@ -105,6 +111,7 @@ const submit = () => {
                     required
                     autofocus
                     autocomplete="Address"
+                    placeholder="14 Street, 12 Avenue, 12th Floor"
                 />
                 <InputError class="mt-2" :message="form.errors.address" />
             </div>
@@ -119,6 +126,7 @@ const submit = () => {
                     required
                     autofocus
                     autocomplete="Phone"
+                    placeholder="08012345678"
                 />
                 <InputError class="mt-2" :message="form.errors.phone" />
             </div>
@@ -133,6 +141,7 @@ const submit = () => {
                     required
                     autofocus
                     autocomplete="Zone"
+                    placeholder="Zone 1"
                 />
                 <InputError class="mt-2" :message="form.errors.zone" />
             </div>
@@ -147,6 +156,7 @@ const submit = () => {
                     required
                     autofocus
                     autocomplete="City"
+                    placeholder="Abuja"
                 />
                 <InputError class="mt-2" :message="form.errors.city" />
             </div>
@@ -161,8 +171,19 @@ const submit = () => {
                     required
                     autofocus
                     autocomplete="State"
+                    placeholder="FCT"
                 />
                 <InputError class="mt-2" :message="form.errors.state" />
+            </div>
+
+            <div>
+                <InputLabel for="profile_type" value="Account Type" />
+                <select v-model="form.profile_type" id="profile_type" name="profile_type" required class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                    <option value="" disabled selected hidden>Select Account Type</option>
+                    <option value="user">User</option>
+                    <option value="landlord">Landlord</option>
+                    <option value="agent">Agent</option>
+                </select>
             </div>
 
             <div class="mt-4">

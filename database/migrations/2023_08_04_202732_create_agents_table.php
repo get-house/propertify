@@ -14,8 +14,6 @@ return new class extends Migration
     {
         Schema::create('agents', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained()->onDelete('cascade');
-
             $table->string('status')->default(\App\Enums\AgentStatusEnum::Pending->value);
             $table->boolean('is_paused')->default(false);
 
