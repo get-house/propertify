@@ -13,31 +13,30 @@ class Property extends Model
 {
     use HasFactory;
 
-	protected $fillable = [
-		'name',
-		'price',
-		'description',
-		'address',
-		'city',
-		'state',
-		'size',
-		'user_id',
-	];
+    protected $fillable = [
+        'name',
+        'price',
+        'description',
+        'address',
+        'city',
+        'state',
+        'size',
+        'landlord_id',
+    ];
 
-	/**
-	 * Model Relationships
-	 *
-	 * @return RELATIONSHIPS
-	 */
+    /**
+     * Model Relationships
+     *
+     * @return RELATIONSHIPS
+     */
+    public function landlord(): BelongsTo
+    {
+        return $this->belongsTo(Landlord::class);
+    }
 
-	public function landlord(): BelongsTo
-	{
-		return $this->belongsTo(Landlord::class);
-	}
-
-	public function tenant(): BelongsToMany
-	{
-		return $this->belongsToMany(Tenant::class, 'tenant_property', 'property_id', 'tenant_id')
-			->withPivot('rent_start_date', 'rent_end_date', 'rent_amount', 'rent_frequency', 'rent_payment_method', 'rent_payment_day', 'rent_payment_reference', 'rent_payment_status', 'rent_payment_status_date', 'rent_payment_status_reason', 'rent_payment_status_description', 'rent_pay');
-	}
+    public function tenant(): BelongsToMany
+    {
+        return $this->belongsToMany(Tenant::class, 'tenant_property', 'property_id', 'tenant_id')
+            ->withPivot('rent_start_date', 'rent_end_date', 'rent_amount', 'rent_frequency', 'rent_payment_method', 'rent_payment_day', 'rent_payment_reference', 'rent_payment_status', 'rent_payment_status_date', 'rent_payment_status_reason', 'rent_payment_status_description', 'rent_pay');
+    }
 }

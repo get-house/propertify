@@ -3,13 +3,9 @@
 namespace Database\Seeders;
 
 use App\Enums\RolesEnum;
-
 use App\Models\Role;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
-
-
 
 class RolesSeeder extends Seeder
 {
@@ -33,11 +29,11 @@ class RolesSeeder extends Seeder
     {
         // assign permission to landlord role
         $role->syncPermissions([
-            'create_property',
-            'update_property',
-            'delete_property',
-            'view_property',
+            'create property',
+            'update property',
+            'delete property',
+            'view property',
+            'view properties',
         ]);
     }
-
 }

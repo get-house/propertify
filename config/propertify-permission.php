@@ -2,12 +2,13 @@
 
 return [
     'Properties' => [
-         'create_property',
-         'update_property',
-         'delete_property',
-         'view_property',
-         'view_any_property',
-         'restore_property',
-         'force_delete_property',
+        'create property',
+        'update property',
+        'delete property',
+        'view property',
+        'view properties',
+        'view any property',
+        'restore property',
+        'force delete property',
     ],
 ];

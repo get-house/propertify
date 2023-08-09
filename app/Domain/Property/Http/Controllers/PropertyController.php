@@ -14,8 +14,21 @@ class PropertyController extends Controller
      */
     public function index()
     {
+        $property = Property::with('landlord')->get();
+
         return inertia('Property/Index', [
-            'properties' => PropertyData::collection(Property::all()),
+            'properties' => PropertyData::collection($property),
+            'can' => [
+                'create' => auth()->user()?->can('create property'),
+                'update' => auth()->user()?->can('update property'),
+                'delete' => auth()->user()?->can('delete property'),
+                'view' => auth()->user()?->can('view property'),
+                'viewAll' => auth()->user()?->can('view properties'),
+                'viewAny' => auth()->user()?->can('view any property'),
+                'restore' => auth()->user()?->can('restore property'),
+                'forceDelete' => auth()->user()?->can('force delete property'),
+            ],
+
         ]);
     }
 
@@ -24,15 +37,28 @@ class PropertyController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Property/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PropertyData $propertyData, Property $property)
     {
-        //
+        $landlord = auth()->user()->profile;
+        $property->create([
+            'name' => $propertyData->name,
+            'price' => $propertyData->price,
+            'description' => $propertyData->description,
+            'landlord_id' => $landlord->id,
+        ]);
+
+        //return flash success message
+        return redirect()->route('properties.index')->with([
+            'success' => 'Property created successfully',
+            'toast' => 'success',
+            'properties' => PropertyData::collection(Property::all()),
+        ]);
     }
 
     /**

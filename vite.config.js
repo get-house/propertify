@@ -9,7 +9,7 @@ let host = 'propertify.test';
 export default defineConfig({
     plugins: [
         laravel({
-            input: 'resources/js/app.js',
+            input: ['resources/js/app.js', 'resources/types/generated.ts'],
             ssr: 'resources/js/ssr.js',
             refresh: true,
         }),

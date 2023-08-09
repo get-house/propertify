@@ -26,8 +26,7 @@ class JetstreamServiceProvider extends ServiceProvider
             'Profile/Show',
             function (Request $request, array $data) {
                 return array_merge($data, [
-                    'role' => $request->user()->getRoleNames()->first(),
-                    'permissions' => $request->user()->getPermissionsViaRoles()->pluck('name')->toArray(),
+
                 ]);
             }
         );

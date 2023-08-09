@@ -19,14 +19,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('price');
-            $table->string('description')->nullable();
-            $table->string('condition')->default(PropertyConditionEnum::NEW);
-            $table->string('status')->default(PropertyStatusEnum::AVAILABLE);
-            $table->string('type')->default(PropertyTypeEnum::APARTMENT);
-			$table->string('furnishing')->default(PropertyFurnishingEnum::UNFURNISHED);
-            $table->string('bedrooms')->default(1);
-            $table->string('bathrooms')->default(1);
-            $table->string('parking')->default(1);
+            $table->string('description');
+            $table->string('condition')->default(PropertyConditionEnum::NEW->value);
+            $table->string('status')->default(PropertyStatusEnum::AVAILABLE->value);
+            $table->string('type')->default(PropertyTypeEnum::APARTMENT->value);
+            $table->string('furnishing')->default(PropertyFurnishingEnum::UNFURNISHED->value);
+            $table->integer('bedrooms')->default(1);
+            $table->integer('bathrooms')->default(1);
+            $table->integer('parking')->default(1);
             $table->string('size')->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
@@ -34,15 +34,15 @@ return new class extends Migration
             $table->boolean('verified')->default(0);
             $table->boolean('featured')->default(0);
 
-            $table->foreignId('landlord_id')->constrained('landlords')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('landlord_id')->constrained('landlords')->onDelete('cascade');
 
             $table->dateTime('published_at')->nullable();
             $table->dateTime('expired_at')->nullable();
             $table->dateTime('sold_at')->nullable();
             $table->dateTime('archived_at')->nullable();
-            $table->dateTime('deleted_at')->nullable();
             $table->dateTime('verified_at')->nullable();
             $table->dateTime('featured_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
