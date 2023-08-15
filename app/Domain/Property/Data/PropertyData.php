@@ -15,7 +15,7 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 class PropertyData extends Data
 {
     public function __construct(
-        public int $id,
+        public ?int $id,
         #[Rule(['string', 'max:150'])]
         public string $name,
         #[Rule(['string', 'max:255'])]

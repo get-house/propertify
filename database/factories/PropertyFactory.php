@@ -27,9 +27,9 @@ class PropertyFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'price' => $this->faker->word,
+            'price' => $this->faker->numberBetween(1000, 10000),
             'description' => $this->faker->text,
-            'size' => $this->faker->numberBetween(10,100) . ' sq ft',
+            'size' => $this->faker->numberBetween(10, 100) . ' sq ft',
             'address' => $this->faker->streetAddress,
             'city' => $this->faker->city,
             'state' =>  $this->faker->randomElement(
@@ -50,7 +50,7 @@ class PropertyFactory extends Factory
         ];
     }
 
- // list array of states in Qatar
+    // list array of states in Qatar
     protected $states = [
         'Ad Dawhah',
         'Al Ghuwayriyah',
@@ -68,7 +68,4 @@ class PropertyFactory extends Factory
     {
         return $this->states[array_rand($this->states)];
     }
-
-
-
 }

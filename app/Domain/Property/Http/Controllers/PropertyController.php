@@ -14,7 +14,7 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        $property = Property::with('landlord')->get();
+        $property = Property::with('landlord')->cursorPaginate();
 
         return inertia('Property/Index', [
             'properties' => PropertyData::collection($property),
@@ -57,7 +57,6 @@ class PropertyController extends Controller
         return redirect()->route('properties.index')->with([
             'success' => 'Property created successfully',
             'toast' => 'success',
-            'properties' => PropertyData::collection(Property::all()),
         ]);
     }
 
