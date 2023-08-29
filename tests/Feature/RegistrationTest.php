@@ -12,9 +12,16 @@ class RegistrationTest extends TestCase
 {
     use RefreshDatabase;
 
+    // seed database
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->seed();
+    }
+
     public function test_registration_screen_can_be_rendered(): void
     {
-        if (! Features::enabled(Features::registration())) {
+        if (!Features::enabled(Features::registration())) {
             $this->markTestSkipped('Registration support is not enabled.');
 
             return;
@@ -40,14 +47,24 @@ class RegistrationTest extends TestCase
 
     public function test_new_users_can_register(): void
     {
-        if (! Features::enabled(Features::registration())) {
+        if (!Features::enabled(Features::registration())) {
             $this->markTestSkipped('Registration support is not enabled.');
 
             return;
         }
 
         $response = $this->post('/register', [
-            'name' => 'Test User',
+            'first_name' => 'Test',
+            'last_name' => 'User',
+            'username' => 'testuser',
+            'address' => '123 Test St',
+            'phone' => '555-555-5555',
+            'zone' => '1',
+            'city' => 'Test City',
+            'state' => 'Test State',
+            'profile_type' => 'App\Models\Landlord',
+            'role' => 'landlord', // 'tenant' or 'landlord
+            'profile_id' => '1',
             'email' => 'test@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
